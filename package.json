@@ -1,19 +1,15 @@
 {
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.10",
-    "express": "^4.21.1",
-    "form-data": "^4.0.1",
-    "mongoose": "^8.7.1",
-    "nodemon": "^3.1.7"
-  },
-  "name": "web",
+  "name": "got-ultimate-guide",
   "version": "1.0.0",
+  "description": "Game of Thrones Ultimate Guide",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "author": "pob",
-  "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
+  },
+  "author": "YourName",
+  "license": "ISC"
 }

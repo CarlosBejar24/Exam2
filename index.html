@@ -5,20 +5,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoT Ultimate Guide</title>
-    <link rel = "icon" href="images/GOT.png" type="image/png">
-    <input type="text" id="search-bar" placeholder="Search here :D">
-    <button id="search-btn">Search</button>
-
+    <link rel="icon" href="images/GOT.png" type="image/jpeg">
 </head>
 <body>
-    <div class="character-info">
+    <div class="container mt-4">
+        <h1>Game of Thrones Character Guide</h1>
+        <div class="form-inline mb-4">
+            <input type="text" id="search-bar" class="form-control mr-2" placeholder="Search for a character">
+            <button id="search-btn" class="btn btn-primary">Search</button>
+        </div>
         
-      </div>
-      
-    <button id="prev-btn">Previous</button>
-    <button id="next-btn">Next</button>
+        <div id="character-display" class="card mb-4">
+            <img id="character-image" class="card-img-top" src="images/default.jpeg" alt="Character Image">
+            <div class="card-body">
+                <h5 id="character-name" class="card-title">Character Name</h5>
+                <p id="character-info" class="card-text">Character Info will appear here.</p>
+            </div>
+        </div>
+        
+        <button id="prev-btn" class="btn btn-secondary">Previous</button>
+        <button id="next-btn" class="btn btn-secondary">Next</button>
+    </div>
 
-    <script type="text/javascript" src="index.js"></script>
-    
+    <!-- Enlace al archivo de frontend -->
+    <script type="text/javascript" src="frontend.js"></script>
 </body>
 </html>
