@@ -1,48 +1,81 @@
-const express = require('express');
-const axios = require('axios');
-const path = require('path');
 
+const express = require('express');
+const https = require("https");
 const app = express();
 
-// Middleware para servir archivos estáticos desde la carpeta "public"
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public'))); // Sirve archivos estáticos
+app.use(express.urlencoded({extended: true}));
+app.use(express.static("public"));
+app.engine("ejs", require("ejs").renderFile);
+app.set("view engine", "ejs");
 
-// Ruta para servir el archivo index.html
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+//var info = "";
+var character = "";
 
-// Obtener información de un personaje por ID de ThronesAPI
-app.get('/infoGOT/:id', async (req, res) => {
+// TODO ESTO ES PARA VER QUE SI FUNCIONARA 
+
+//app.get('/info', (req, res) => {
+   // const url = "https://v2.jokeapi.dev/joke/Any";
+    //https.get(url, (response) => {
+        //console.log("RESPONSE : ");
+        //let resContent = "";
+  
+        //response.on("data", (data) => {
+            //resContent += data;
+        //}).on("end", () => {
+            //try {
+                //const jsonObj = JSON.parse(resContent);
+                //console.log(jsonObj);
+                //info = jsonObj;
+               // res.redirect("/");
+            //} catch (error) {
+                //console.error("Error parsing JSON:", error);
+               // res.redirect("/"); // Handle JSON parsing error gracefully
+            //}
+        //}).on("error", (e) => {
+            //console.error(`Got an error: ${e.message}`);
+            //res.redirect("/"); // Redirect on error
+        //});
+    //});
+  //});
+
+app.get('/infoGOT/:id', (req,res)=> {
     const characterId = req.params.id;
-    try {
-        const response = await axios.get(`https://thronesapi.com/api/v2/Characters/${characterId}`);
-        const character = response.data;
-        res.json(character);
-    } catch (error) {
-        res.status(500).json({ error: "Error fetching character from ThronesAPI" });
-    }
+    const url = `https://ThronesApi.com/api/v2/Characters/${characterId}`;
+
+    https.get(url, (response) => {
+        console.log("RESPONSE:");
+        let resContent = "";
+
+        response.on("data", (data) => {
+            resContent += data;
+        }).on("end", () => {
+            try {
+                const jsonObj = JSON.parse(resContent);
+                console.log(jsonObj);
+                character = jsonObj;
+                res.redirect("/");
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+                res.redirect("/");
+            }
+        }).on("error", (e) => {
+            console.error(`Got an error: ${e.message}`);
+            res.redirect("/"); // Redirect on error
+
+        });
+    });
 });
 
-// Buscar personaje por nombre en An API of Ice and Fire
-app.get('/infoGOT/search', async (req, res) => {
-    const name = req.query.name;
-    try {
-        const response = await axios.get(`https://anapioficeandfire.com/api/characters?name=${encodeURIComponent(name)}`);
-        const character = response.data[0]; // Obtener el primer resultado
-        if (character) {
-            res.json(character);
-        } else {
-            res.status(404).json({ error: "Character not found" });
-        }
-    } catch (error) {
-        res.status(500).json({ error: "Error fetching character from Ice and Fire API" });
-    }
-});
-
-// Puerto donde escucha el servidor
-app.listen(4000, () => {
-    console.log("Listening on port 4000");
-});
+  app.get('/test', (req, res) => {
+    res.send('¡El servidor está funcionando correctamente!');
+  });
+  
+  app.get('/', (req, res) => {
+    res.render('home', { joke: info, character:character});
+  });
+  
+  
+  app.listen(4000, () => {
+      console.log("Listening on port 4000");
+  });
