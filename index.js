@@ -60,7 +60,7 @@ app.get('/infoGOT/:id', async (req, res) => {
                         character.title = character.title || iceCharacter.titles.join(', ');
                         character.family = character.family || iceCharacter.allegiances.join(', ');
                         character.born = character.born || iceCharacter.born || "Unknown";
-                        character.died = character.died || iceCharacter.died || "N/A";
+                        character.died = character.died || iceCharacter.died || "Still alive :)";
                         character.aliases = iceCharacter.aliases; // Obtener aliases desde Ice & Fire
                         break;
                     }
@@ -81,7 +81,7 @@ app.get('/infoGOT/:id', async (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    res.send('¡El servidor está funcionando correctamente!');
+    res.send('The server works correectly!');
 });
 
 var lol = 1;

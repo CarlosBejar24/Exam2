@@ -27,7 +27,7 @@ document.getElementById('searchForm').addEventListener('submit', async function(
 
   // Verifica que se haya ingresado un valor
   if (!searchValue) {
-    alert("Por favor, ingresa un nombre");
+    alert("Please, write a name");
     return;
   }
 
@@ -37,21 +37,26 @@ document.getElementById('searchForm').addEventListener('submit', async function(
     const data = await response.json();
 
     // Buscar el personaje por nombre (busca coincidencia con el nombre ingresado)
-    const character = data.find(character => character.fullName.toLowerCase() === searchValue.toLowerCase());
+    const character = data.find(character => 
+      character.firstName.toLowerCase().includes(searchValue.toLowerCase()) || 
+      character.lastName.toLowerCase().includes(searchValue.toLowerCase()) || 
+      character.fullName.toLowerCase().includes(searchValue.toLowerCase())
+  );
+  
 
     if (!character) {
-      alert(`No se encontró ningún personaje con el nombre: ${searchValue}`);
+      alert(`There was no character found with the name: ${searchValue}`);
       return;
     }
 
     const characterId = character.id;
-    alert(`El ID del personaje es: ${characterId}, serás redireccionado`);
+    alert(`The ID that correspons to the character is: ${characterId}, you'll be sent there.`);
 
     // Redirige al usuario a la página correspondiente con el ID
     window.location.href = `/infoGOT/${characterId}`;
 
   } catch (error) {
-    console.error('Error al buscar el personaje:', error);
-    alert('Hubo un error al buscar el personaje.');
+    console.error('Error, there was an error in the search', error);
+    alert('There was a mistake in your character search.');
   }
 });
