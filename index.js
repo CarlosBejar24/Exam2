@@ -3,43 +3,22 @@ const express = require('express');
 const https = require("https");
 const app = express();
 
+app.use(express.static(__dirname));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.engine("ejs", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
-//var info = "";
+var info = "";
 var character = "";
 
-// TODO ESTO ES PARA VER QUE SI FUNCIONARA 
 
-//app.get('/info', (req, res) => {
-   // const url = "https://v2.jokeapi.dev/joke/Any";
-    //https.get(url, (response) => {
-        //console.log("RESPONSE : ");
-        //let resContent = "";
-  
-        //response.on("data", (data) => {
-            //resContent += data;
-        //}).on("end", () => {
-            //try {
-                //const jsonObj = JSON.parse(resContent);
-                //console.log(jsonObj);
-                //info = jsonObj;
-               // res.redirect("/");
-            //} catch (error) {
-                //console.error("Error parsing JSON:", error);
-               // res.redirect("/"); // Handle JSON parsing error gracefully
-            //}
-        //}).on("error", (e) => {
-            //console.error(`Got an error: ${e.message}`);
-            //res.redirect("/"); // Redirect on error
-        //});
-    //});
-  //});
 
-app.get('/infoGOT/:id', (req,res)=> {
+
+// Aquí conectamos los apis
+ app.get('/infoGOT/:id', (req,res)=> {
     const characterId = req.params.id;
     const url = `https://ThronesApi.com/api/v2/Characters/${characterId}`;
 
@@ -54,7 +33,7 @@ app.get('/infoGOT/:id', (req,res)=> {
                 const jsonObj = JSON.parse(resContent);
                 console.log(jsonObj);
                 character = jsonObj;
-                res.redirect("/");
+                res.render('home', { character: character });
             } catch (error) {
                 console.error("Error parsing JSON:", error);
                 res.redirect("/");
@@ -66,13 +45,17 @@ app.get('/infoGOT/:id', (req,res)=> {
         });
     });
 });
-
   app.get('/test', (req, res) => {
     res.send('¡El servidor está funcionando correctamente!');
   });
-  
+  var lol = 1;
+
   app.get('/', (req, res) => {
-    res.render('home', { joke: info, character:character});
+    if(lol==1){
+        res.redirect('/infoGOT/0'); 
+        lol=2
+    }
+    res.render('home', {character:character});
   });
   
   
