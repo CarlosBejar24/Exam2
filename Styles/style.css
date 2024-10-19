@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@300;400;700&display=swap');
+
 body {
     background-image: url('/images/wpgot.jpeg'); /* Cambia la URL por la ruta de tu imagen */
     background-size: cover; /* Hace que la imagen cubra toda la pantalla */
@@ -7,22 +9,25 @@ body {
     height: 100vh; /* Hace que el body siempre ocupe el 100% de la altura de la ventana */
     margin: 0;
     padding: 0;
-  }
-
-body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Nunito', sans-serif; /* Usa la fuente Nunito */
     color: #333;
 }
+
 h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', serif; /* Usa la fuente Playfair Display */
     color: #2c3e50;
 }
+
 nav.navbar {
     background-color: #34495e;
+    font-family: 'Lora', serif; /* Usa la fuente Lora en la navbar */
 }
+
 nav.navbar a.nav-link {
     color: white;
+    font-weight: 700; /* Hace que los enlaces sean negritas */
 }
+
 img {
     aspect-ratio: 1 / 1; /* Mantiene una proporción de 1:1 (cuadrado) */
     width: 400px; /* Se ajusta al ancho del contenedor */
@@ -30,34 +35,45 @@ img {
     object-fit: cover; /* Asegura que la imagen cubra todo el contenedor sin distorsión */
     border-radius: 10px; /* Esquinas redondeadas */
 }
+
 p {
     font-size: 18px; /* Cambia este valor al tamaño que desees */
     line-height: 1.6; /* Ajusta la altura de la línea para mejorar la legibilidad */
+    font-family: 'Nunito', sans-serif; /* Aplica la fuente Nunito al texto */
 }
+
 .container, .card {
     border: none !important; /* Elimina los bordes */
     box-shadow: none !important; /* Elimina cualquier sombra */
     background-color: transparent !important; /* Asegura que sean transparentes */
 }
+
 .btn-primary {
     background-color: #2980b9;
     border-color: #2980b9;
+    font-family: 'Nunito', sans-serif;
 }
+
 .btn-secondary {
     background-color: #8e44ad;
     border-color: #8e44ad;
+    font-family: 'Nunito', sans-serif;
 }
+
 button {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
 button:hover {
     background-color: #1abc9c;
     transform: scale(1.05);
 }
+
 footer {
     background-color: #2c3e50;
     color: white;
     text-align: center;
     padding: 20px 0;
     margin-top: 30px;
+    font-family: 'Lora', serif; /* Usa la fuente Lora en el footer */
 }
